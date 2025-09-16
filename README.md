@@ -16,9 +16,14 @@ Sistema simples de gestão escolar desenvolvido em **Node.js**, permitindo cadas
 
 ## Estrutura do Projeto
 
-Gestao-escolar/
+Gestao-escolar
+
 |
+
 ├─ index.js # Ponto de entrada do programa 
+
 ├─ funcoes.js # Funções de manipulação de alunos  
+
 ├─ alunos.json # Armazena os dados dos alunos 
+
 └─ README.md # Documentação do projeto
