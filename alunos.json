@@ -1,20 +1,101 @@
 [
   {
-    "nome": "pedro",
-    "idade": 15,
+    "id": 1,
+    "nome": "Caua",
+    "idade": 18,
     "notas": [
-      9,
-      9,
-      10
-    ]
+      8,
+      6,
+      7
+    ],
+    "media": 7
   },
   {
-    "nome": "ana",
-    "idade": 12,
+    "id": 2,
+    "nome": "Anny",
+    "idade": 17,
+    "notas": [
+      10,
+      9,
+      10
+    ],
+    "media": 9.666666666666666
+  },
+  {
+    "id": 3,
+    "nome": "Pedro",
+    "idade": 15,
     "notas": [
       7,
+      5,
+      5
+    ],
+    "media": 5.666666666666667
+  },
+  {
+    "id": 4,
+    "nome": "Alberto",
+    "idade": 16,
+    "notas": [
+      5,
       8,
-      6
-    ]
+      2
+    ],
+    "media": 5
+  },
+  {
+    "id": 5,
+    "nome": "Lucas",
+    "idade": 15,
+    "notas": [
+      2,
+      6,
+      0
+    ],
+    "media": 2.6666666666666665
+  },
+  {
+    "id": 7,
+    "nome": "Paulo",
+    "idade": 17,
+    "notas": [
+      8,
+      6,
+      10
+    ],
+    "media": 8
+  },
+  {
+    "id": 8,
+    "nome": "Kaleb",
+    "idade": 17,
+    "notas": [
+      8,
+      3,
+      4
+    ],
+    "media": 5
+  },
+  {
+    "id": 9,
+    "nome": "Mauro",
+    "idade": 16,
+    "notas": [
+      5,
+      2,
+      1
+    ],
+    "media": 2.6666666666666665
+  },
+  {
+    "id": 10,
+    "nome": "Marcos",
+    "idade": 16,
+    "notas": [
+      5,
+      3,
+      4
+    ],
+    "media": 4
   }
 ]
