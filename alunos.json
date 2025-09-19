@@ -68,11 +68,11 @@
   {
     "id": 8,
     "nome": "Kaleb",
-    "idade": 17,
+    "idade": "17",
     "notas": [
       8,
-      3,
-      4
+      4,
+      3
     ],
     "media": 5
   },
