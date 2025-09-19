@@ -7,6 +7,7 @@ Sistema simples de gestão escolar desenvolvido em **Node.js**, permitindo cadas
 - ✅ Listar todos os alunos
 - ✅ Remover alunos
 - ✅ Calcular médias e identificar alunos em recuperação
+- ✅ Editar alunos
 
 ## Tecnologias
 - Node.js
