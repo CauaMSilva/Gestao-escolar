@@ -1,7 +1,10 @@
-import fs from "fs"
+import fs from "fs";
 import readline from "readline";
-
-const arquivo = "alunos.json"
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const arquivo = path.join(__dirname, "../dados/alunos.json");
 
 export function lerAlunos(){
   const conteudo = fs.readFileSync(arquivo, "utf-8")

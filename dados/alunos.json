@@ -67,8 +67,8 @@
   },
   {
     "id": 8,
-    "nome": "Kaleb",
-    "idade": "17",
+    "nome": "Kalebi",
+    "idade": "18",
     "notas": [
       8,
       4,
@@ -97,5 +97,16 @@
       4
     ],
     "media": 4
+  },
+  {
+    "id": 11,
+    "nome": "Talysson",
+    "idade": 16,
+    "notas": [
+      2,
+      2,
+      2
+    ],
+    "media": 2
   }
 ]
