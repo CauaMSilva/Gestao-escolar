@@ -15,6 +15,7 @@ Projeto educativo para praticar Node.js, manipulação de arquivos JSON e lógic
 ## 📁 Estrutura do Projeto
 
 gestao-escolar/ 
+
 │ ├── src/                     # Código-fonte 
 
 │   ├── Main.js              # Arquivo principal (interface CLI) 
