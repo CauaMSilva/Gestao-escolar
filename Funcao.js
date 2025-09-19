@@ -3,9 +3,38 @@ import readline from "readline";
 
 const arquivo = "alunos.json"
 
-export function mediaGeral(){
+export function lerAlunos(){
   const conteudo = fs.readFileSync(arquivo, "utf-8")
   const alunos = JSON.parse(conteudo)
+  return alunos
+}
+export function validarAluno(nome, idade, notas) {
+  if (!nome || typeof nome !== "string" || nome.trim().length < 2) {
+    return { valido: false, mensagem: "Nome inválido. Deve ter pelo menos 2 letras." }
+  }
+
+  if (/^\d+$/.test(nome)) {
+    return { valido: false, mensagem: "Nome não pode ser apenas números." }
+  }
+
+  for (let i = 0; i < notas.length; i++){
+    if (notas[i] < 0 || notas[i] > 10){
+      return {valido: false, mensagem: "Nota deve estar entre 0 e 10."}
+    }
+    if (isNaN(notas[i])){
+      return {valido: false, mensagem: "Nota deve ser número"}
+    }
+  }
+
+  if (idade < 0 || idade > 100){
+    return {valido: false, mensagem: "Idade inválida"}
+  }
+
+  return { valido: true, mensagem: "Aluno válido!" }
+}
+
+export function mediaGeral(){
+  const alunos = lerAlunos()
 
   let totalMedia
 
@@ -16,8 +45,7 @@ export function mediaGeral(){
   return totalMedia/alunos.length
 }
 export function maiorMedia(){
-  const conteudo = fs.readFileSync(arquivo, "utf-8")
-  const alunos = JSON.parse(conteudo)
+  const alunos = lerAlunos()
 
   let melhorAluno
   let quantTopUm
@@ -45,8 +73,7 @@ export function calcularMedia(notas){
 }
 
 export function gerarProximoId(){
-  const conteudo = fs.readFileSync(arquivo, "utf-8")
-  const alunos = JSON.parse(conteudo)
+  const alunos = lerAlunos()
   let maiorId = 0
 
   alunos.map((elemento, indice)=>{
@@ -58,28 +85,33 @@ export function gerarProximoId(){
 }
 
 export function cadastrarAlunos(id, nome, idadeStr, notasStr){
-
   const notas = notasStr.split(",").map(Number)
   const idade = Number(idadeStr)
   const media = calcularMedia(notas)
+
+  const validacao = validarAluno(nome, notas, idade)
+  if (!validacao.valido) {
+    console.log(validacao.mensagem)
+    return
+  }
+
   const aluno = {id, nome, idade, notas, media}
 
   let alunos = []
 
   if (fs.existsSync(arquivo)){
     const conteudo = fs.readFileSync(arquivo, "utf-8")
-     alunos = JSON.parse(conteudo)
-   }
+    alunos = JSON.parse(conteudo)
+  }
 
-   alunos.push(aluno)
-   const dadosDosAlunos = JSON.stringify(alunos, null, 2)
-   fs.writeFileSync(arquivo, dadosDosAlunos)
-    console.log("\nAluno cadastrado com sucesso!")
+  alunos.push(aluno)
+  const dadosDosAlunos = JSON.stringify(alunos, null, 2)
+  fs.writeFileSync(arquivo, dadosDosAlunos)
+  console.log("\nAluno cadastrado com sucesso!")
 }
 
 export function apagarAlunoPorId(id){
-  const conteudo = fs.readFileSync(arquivo, "utf-8")
-  const alunos = JSON.parse(conteudo)
+  const alunos = lerAlunos()
 
   const novosAlunos = alunos.filter(aluno => aluno.id != id)
   const dadosAlunos = JSON.stringify(novosAlunos, null, 2)
@@ -94,8 +126,7 @@ export function apagarAlunoPorId(id){
 }
 
 export function apagarAlunoPorNome(nome){
-  const conteudo = fs.readFileSync(arquivo, "utf-8")
-  const alunos = JSON.parse(conteudo)
+  const alunos = lerAlunos()
 
   const novosAlunos = alunos.filter(aluno => aluno.nome != nome)
   const dadosAlunos = JSON.stringify(novosAlunos, null, 2)
@@ -110,8 +141,7 @@ export function apagarAlunoPorNome(nome){
 }
 
 export function listarAlunos(){
-  const conteudo = fs.readFileSync(arquivo, "utf-8")
-  const alunos = JSON.parse(conteudo)
+  const alunos = lerAlunos()
 
   console.log("=======Alunos cadastrados=======\n")
   alunos.map((elemento, indice)=>{
@@ -120,8 +150,7 @@ export function listarAlunos(){
 }
 
 export function listarAlunosAprovados(){
-  const conteudo = fs.readFileSync(arquivo, "utf-8")
-  const alunos = JSON.parse(conteudo)
+  const alunos = lerAlunos()
 
   const aprovados = alunos.filter(elemento => elemento.media >= 7)
 
@@ -132,8 +161,7 @@ export function listarAlunosAprovados(){
 }
 
 export function listarAlunosRecuperacao(){
-  const conteudo = fs.readFileSync(arquivo, "utf-8")
-  const alunos = JSON.parse(conteudo)
+  const alunos = lerAlunos()
 
   const recuperacao = alunos.filter(elemento => elemento.media >= 5 && elemento.media < 7)
 
@@ -144,8 +172,7 @@ export function listarAlunosRecuperacao(){
 }
 
 export function listarAlunosReprovados(){
-  const conteudo = fs.readFileSync(arquivo, "utf-8")
-  const alunos = JSON.parse(conteudo)
+  const alunos = lerAlunos()
 
   const reprovados = alunos.filter(elemento => elemento.media < 5)
 
@@ -155,3 +182,30 @@ export function listarAlunosReprovados(){
   })
 }
 
+export function editarAluno(idEditar, nomeMod, idadeMod, notasMod) {
+  const alunos = lerAlunos()
+  const idEdit = Number(idEditar)
+
+  let alunoEdit = alunos.find(elemento => elemento.id == idEdit)
+
+  if (!alunoEdit) {
+    console.log("Aluno não encontrado")
+    return
+  }
+
+  if (nomeMod) alunoEdit.nome = nomeMod
+  if (idadeMod) alunoEdit.idade = idadeMod
+  if (notasMod) alunoEdit.notas = notasMod.split(",").map(Number)
+
+  const validacao = validarAluno(alunoEdit.nome, alunoEdit.idade, alunoEdit.notas)
+  alunoEdit.media = calcularMedia(alunoEdit.notas)
+
+  if (!validacao.valido) {
+    console.log(validacao.mensagem)
+    return
+  }
+
+  fs.writeFileSync(arquivo, JSON.stringify(alunos, null, 2))
+
+  console.log("\nAluno editado com sucesso!")
+}
