@@ -16,11 +16,17 @@ Projeto educativo para praticar Node.js, manipulação de arquivos JSON e lógic
 
 gestao-escolar/ 
 │ ├── src/                     # Código-fonte 
+
 │   ├── Main.js              # Arquivo principal (interface CLI) 
+
 │   └── Funcao.js            # Funções do sistema (CRUD, cálculos,validações) 
+
 │ ├── dados/                   # Arquivos de dados
+
 │   └── alunos.json          # Armazena os alunos cadastrados 
+
 │ ├── package.json             # Dependências do Node.js 
+
 └── README.md                # Documentação do projeto
 
 ---
